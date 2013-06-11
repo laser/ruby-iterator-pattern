@@ -62,8 +62,14 @@ iterator = FruitIterator.new myFridge
 
 while iterator.has_next?
   f = iterator.get_next
-  puts "fruit: #{f[:name]}, #{f[:qty]}"
+  puts "external iterator! fruit: #{f[:name]}, #{f[:qty]}"
 end
+
+# results:
+#
+# external iterator! fruit: apple, 4
+# external iterator! fruit: orange, 2
+# external iterator! fruit: pear, 3
 ```
 
 Internal Iterator Example
@@ -90,6 +96,11 @@ for_each_fruit(myFridge) do |fruit|
   puts "internal iterator! fruit: #{fruit[:name]}, #{fruit[:qty]}"
 end
 
+# results:
+#
+# internal iterator! fruit: apple, 4
+# internal iterator! fruit: orange, 2
+# internal iterator! fruit: pear, 3
 ```
 
 External vs. Internal
