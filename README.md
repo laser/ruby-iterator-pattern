@@ -12,10 +12,10 @@ reference to items inside of an otherwise-opaque object.
 Types of Iterators
 ------------------
 
-There are two types of iterators: External and Internal. With an external
+There are two types of iterators: External and Internal. With an External
 iterator, the consumer gets hooks that allow it to move through the items
 exposed by the iterator (with methods like "has_next" and "get_next"). The
-internal iterator, however, does the moving for you; you simply pass it a
+Internal iterator, however, does the moving for you; you simply pass it a
 block and it'll yield as many times as it sees fit.
 
 External Iterator Example
@@ -62,14 +62,14 @@ iterator = FruitIterator.new myFridge
 
 while iterator.has_next?
   f = iterator.get_next
-  puts "external iterator! fruit: #{f[:name]}, #{f[:qty]}"
+  puts "External iterator! fruit: #{f[:name]}, #{f[:qty]}"
 end
 
 # results:
 #
-# external iterator! fruit: apple, 4
-# external iterator! fruit: orange, 2
-# external iterator! fruit: pear, 3
+# External iterator! fruit: apple, 4
+# External iterator! fruit: orange, 2
+# External iterator! fruit: pear, 3
 ```
 
 Internal Iterator Example
@@ -93,25 +93,20 @@ def for_each_fruit(fridge)
 end
 
 for_each_fruit(myFridge) do |fruit|
-  puts "internal iterator! fruit: #{fruit[:name]}, #{fruit[:qty]}"
+  puts "Internal iterator! fruit: #{fruit[:name]}, #{fruit[:qty]}"
 end
 
 # results:
 #
-# internal iterator! fruit: apple, 4
-# internal iterator! fruit: orange, 2
-# internal iterator! fruit: pear, 3
+# Internal iterator! fruit: apple, 4
+# Internal iterator! fruit: orange, 2
+# Internal iterator! fruit: pear, 3
 ```
 
 External vs. Internal
 ---------------------
 
-Use the external iterator if you need to control the iteration from the
-consumer - since you have the tools to stop iteration at any time. A use-case
-presented in Russ Olsen's book (Ruby Design Patterns) was the merging of two
-sorted arrays. You'd need to step through each array's contents sequentially
-and simultaneously - which would be difficult (if not impossible) to do using
-internal iteration.
-
-Use the internal iteration if you don't need to control iteration from the
-outside.
+If the benefit of controlling iteration is outweighed by the overhead of
+managing the state of the iterator - you may wish to simply use an Internal
+iterator. If flexibility is paramount (and you find yourself needing or wanting
+to control iteration explicitly) - then an External iterator may be for you.
